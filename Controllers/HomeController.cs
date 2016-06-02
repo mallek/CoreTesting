@@ -1,12 +1,14 @@
-
+using Microsoft.AspNetCore.Mvc;
+using OdeToFood.Modles;
 
 namespace OdeToFood.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
-        public string Index()
+        public ObjectResult Index()
         {
-            return "Hello! from the homoe controller";
+            var model = new Restaurant { Id = 1, Name = "Mallek's Place" };
+            return new ObjectResult(model);
         }
     }
 }
