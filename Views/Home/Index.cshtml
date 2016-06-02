@@ -1,0 +1,20 @@
+@model IEnumerable<OdeToFood.Modles.Restaurant>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome</h1>
+    <table>
+        @foreach(var restaurant in Model)
+        {
+            <tr>
+                <td>@restaurant.Id</td><td>@restaurant.Name</td>
+            </tr>
+        }        
+    </table>
+</body>
+</html>

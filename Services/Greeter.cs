@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Configuration;
 
-namespace OdeToFood.Service
+namespace OdeToFood.Services
 {
     
     
