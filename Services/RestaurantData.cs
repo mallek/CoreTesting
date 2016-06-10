@@ -1,14 +1,45 @@
 using System;
 using System.Collections.Generic;
-using OdeToFood.Modles;
+using OdeToFood.Entities;
+using System.Linq;
+
 
 namespace OdeToFood.Services
 {
-    
-   public interface IRestaurantData
+
+    public interface IRestaurantData
    {
        IEnumerable<Restaurant> GetAll();
+       Restaurant Get(int id);
+       void Add(Restaurant newResturant);
    }
+
+    public class SqlRestaurantData : IRestaurantData
+    {
+
+        private OdeToFoodDbContext _context;
+
+        public SqlRestaurantData(OdeToFoodDbContext context)               
+        {
+            _context = context;
+        }
+
+        public void Add(Restaurant newResturant)
+        {
+            _context.Add(newResturant);
+            _context.SaveChanges();
+        }
+
+        public Restaurant Get(int id)
+        {
+             return _context.Restaurants.FirstOrDefault(r => r.Id == id);
+        }
+
+        public IEnumerable<Restaurant> GetAll()
+        {
+            return _context.Restaurants.ToList();
+        }
+    }
 
     public class InMemoryRestaurantData : IRestaurantData
     {
@@ -22,7 +53,17 @@ namespace OdeToFood.Services
                new Restaurant { Id = 3, Name = "Rays Hot Dogs"}
            };           
        }
-       
+
+        public void Add(Restaurant newResturant)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Restaurant Get(int id)
+        {
+            return _restaurants.FirstOrDefault(x => x.Id == id);
+        }
+
         public IEnumerable<Restaurant> GetAll()
         {
             return _restaurants;

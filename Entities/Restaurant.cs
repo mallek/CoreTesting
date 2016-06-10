@@ -1,4 +1,4 @@
-namespace OdeToFood.Modles
+namespace OdeToFood.Entities
 {
    public class Restaurant
    {
