@@ -8,7 +8,6 @@ using OdeToFood.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
-
 namespace OdeToFood
 {
     public class Startup
