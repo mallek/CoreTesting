@@ -14,7 +14,7 @@
     </div>
     <div>
         <label asp-for="CuisineType"></label>
-        <select asp-for="CuisineType" asp-items="Html.GetEnumSelectList(typeof(CuisineType))" />
+        <select asp-for="CuisineType" asp-items="@Html.GetEnumSelectList(typeof(CuisineType))" />
         <span asp-validation-for="CuisineType"></span>        
     </div>
     <div>
