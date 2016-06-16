@@ -6,7 +6,9 @@ using Microsoft.Extensions.Configuration;
 using OdeToFood.Services;
 using OdeToFood.Entities;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Routing;
 
 namespace OdeToFood
 {
@@ -46,6 +48,8 @@ namespace OdeToFood
 
             //services.AddDbContext<OdeToFoodDbContext>(options => options.UseSqlServer(Configuration["database:connection"]));           
             
+            services.AddIdentity<User, IdentityRole>()
+                    .AddEntityFrameworkStores<OdeToFoodDbContext>();
 
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
@@ -53,7 +57,7 @@ namespace OdeToFood
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app,  IGreeter greeter)
+        public void Configure(IApplicationBuilder app,  IGreeter greeter, IHostingEnvironment hostingEnvironment)
         {  
             if(_isDevelopment)
             {
@@ -64,6 +68,10 @@ namespace OdeToFood
             // app.UseStaticFiles();
             
             app.UseFileServer();
+
+            app.UseNodeModules((HostingEnvironment)hostingEnvironment);
+
+            app.UseIdentity();
             
             //app.UseMvcWithDefaultRoute();
             

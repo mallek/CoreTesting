@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OdeToFood.Entities;
 using OdeToFood.Services;
@@ -35,6 +36,7 @@ namespace OdeToFood.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Edit(int id)
         {
             var model = _restaurantData.Get(id);
@@ -43,10 +45,11 @@ namespace OdeToFood.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
-            return View();
+            
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(int id, RestaurantEditViewModel input)
         {
             var restautant = _restaurantData.Get(id);
